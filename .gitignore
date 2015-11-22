@@ -1,0 +1,15 @@
+*.iml
+*.ipr
+*.iws
+.idea/
+.gradle/
+build/
+.DS_Store
+out/
+
+#Eclipse ignores
+.project
+**/.classpath
+**/.settings
+**/bin
+dependencies.pid
