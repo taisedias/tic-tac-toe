@@ -15,7 +15,18 @@ public class Game {
     }
 
     public boolean isOver() {
-        return playerWins();
+        return playerWins() || allPositionsAreFilled();
+    }
+
+    public boolean allPositionsAreFilled() {
+        for (int row = 0; row < grid.length; row++) {
+            for (int column = 0; column < grid[row].length; column++) {
+                if (grid[row][column] == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public boolean playerWins() {

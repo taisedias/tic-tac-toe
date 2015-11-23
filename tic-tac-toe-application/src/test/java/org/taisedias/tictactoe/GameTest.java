@@ -23,7 +23,7 @@ public class GameTest {
     }
 
     @Test
-    public void gameShouldNotBeOver() {
+    public void notAllPositionsShouldBeFilled() {
         game.playTurn(firstPlayer, Position.builder().row(1).column(0).build());
         game.playTurn(secondPlayer, Position.builder().row(0).column(1).build());
         game.playTurn(firstPlayer, Position.builder().row(1).column(1).build());
@@ -34,6 +34,24 @@ public class GameTest {
                                        {0, 0, 0}}, game.getGrid());
         assertThat(game.isOver(), is(false));
         assertThat(game.playerWins(), is(false));
+    }
+
+    @Test
+    public void noPlayShouldWin() {
+        game.playTurn(firstPlayer, Position.builder().row(0).column(0).build());
+        game.playTurn(secondPlayer, Position.builder().row(1).column(1).build());
+        game.playTurn(firstPlayer, Position.builder().row(0).column(2).build());
+        game.playTurn(secondPlayer, Position.builder().row(0).column(1).build());
+        game.playTurn(firstPlayer, Position.builder().row(2).column(1).build());
+        game.playTurn(secondPlayer, Position.builder().row(1).column(0).build());
+        game.playTurn(firstPlayer, Position.builder().row(1).column(2).build());
+        game.playTurn(secondPlayer, Position.builder().row(2).column(2).build());
+        game.playTurn(firstPlayer, Position.builder().row(2).column(0).build());
+        assertArrayEquals(new char[][]{{o, x, o},
+                                       {x, x, o},
+                                       {o, o, x}}, game.getGrid());
+        assertThat(game.allPositionsAreFilled(), is(true));
+        assertThat(game.isOver(), is(true));
     }
 
     @Test
