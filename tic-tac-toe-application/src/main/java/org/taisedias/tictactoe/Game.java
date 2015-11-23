@@ -20,7 +20,21 @@ public class Game {
         return scoredRow() || scoredColumn() || scoredDiagonal();
     }
 
-    private boolean scoredColumn() {
+    public boolean scoredColumn() {
+        boolean wins;
+        for (int column = 0; column < grid.length; column++) {
+            char input = grid[0][column];
+            if (!isValid(input)) {
+                continue;
+            }
+            wins = true;
+            for (int row = 1; row < grid.length; row++) {
+                wins = wins && (input == grid[row][column]);
+            }
+            if (wins) {
+                return wins;
+            }
+        }
         return false;
     }
 
