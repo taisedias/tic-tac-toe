@@ -1,0 +1,33 @@
+group 'tic-tac-toe-application'
+version '1.0'
+
+apply plugin: 'idea'
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testCompile
+    }
+}
+
+dependencies {
+    testCompile "info.cukes:cucumber-core:1.1.8"
+    testCompile "info.cukes:cucumber-java:1.1.8"
+    testCompile "info.cukes:cucumber-junit:1.1.8"
+    testCompile "org.seleniumhq.selenium:selenium-java:2.21.0"
+    testCompile "org.seleniumhq.selenium:selenium-firefox-driver:2.48.2"
+}
+
+task runUiTests(type: JavaExec) {
+    main = "cucumber.api.cli.Main"
+    args += ['-f', 'pretty',
+             '--glue', 'org.taisedias.tictactoe.ui.resources',
+             'src/test/java',
+             '--strict'
+            ]
+    classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+}
