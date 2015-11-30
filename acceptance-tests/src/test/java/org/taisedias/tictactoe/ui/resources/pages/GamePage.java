@@ -12,6 +12,8 @@ public class GamePage {
     }
 
     public String getTitle() {
-        return driver.getTitle();
+        String title = driver.getTitle();
+        driver.close();
+        return title;
     }
 }
